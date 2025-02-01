@@ -7,9 +7,22 @@ plugins {
     alias(libs.plugins.composeCompiler) apply false
     alias(libs.plugins.kotlinMultiplatform) apply false
 
-    kotlin("jvm") version "2.1.10" // Update to the latest stable version
+    kotlin("jvm") version "2.1.10"
+    application
 }
 
 repositories {
     mavenCentral()
+}
+
+group = "com.athlos.core"
+version = "1.0.0"
+
+dependencies {
+    implementation(kotlin("stdlib"))
+    implementation("com.juul.kable:core:0.32.0")
+}
+
+application {
+    mainClass.set("com.athlos.core.ApplicationKt")
 }
