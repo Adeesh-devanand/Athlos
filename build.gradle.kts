@@ -2,8 +2,8 @@ val kableVersion = "0.35.0"
 val coroutinesVersion = "1.10.1"
 
 plugins {
-    id("com.android.application") version "8.8.0"// or id("com.android.library")
-    kotlin("multiplatform") version "2.1.10"
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.androidApplication)
 }
 
 repositories {
