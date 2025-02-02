@@ -1,6 +1,3 @@
-val kableVersion = "0.35.0"
-val coroutinesVersion = "1.10.1"
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
@@ -18,12 +15,12 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api("org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutinesVersion}")
-            implementation("com.juul.kable:kable-core:${kableVersion}")
+            implementation(libs.kotlin.coroutines.core)
+            implementation(libs.kable)
         }
 
         androidMain.dependencies {
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutinesVersion}")
+            implementation(libs.kotlin.coroutines.android)
         }
     }
 }
