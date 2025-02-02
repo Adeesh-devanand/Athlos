@@ -1,28 +1,37 @@
-plugins {
-    // this is necessary to avoid the plugins to be loaded multiple times
-    // in each subproject's classloader
-    alias(libs.plugins.androidApplication) apply false
-    alias(libs.plugins.androidLibrary) apply false
-    alias(libs.plugins.composeMultiplatform) apply false
-    alias(libs.plugins.composeCompiler) apply false
-    alias(libs.plugins.kotlinMultiplatform) apply false
+val kableVersion = "0.35.0"
+val coroutinesVersion = "1.10.1"
 
-    kotlin("jvm") version "2.1.10"
-    application
+plugins {
+    id("com.android.application") version "8.8.0"// or id("com.android.library")
+    kotlin("multiplatform") version "2.1.10"
 }
 
 repositories {
     mavenCentral()
 }
 
-group = "com.athlos.core"
-version = "1.0.0"
+kotlin {
+    androidTarget()
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
 
-dependencies {
-    implementation(kotlin("stdlib"))
-    implementation("com.juul.kable:core:0.32.0")
+    sourceSets {
+        commonMain.dependencies {
+            api("org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutinesVersion}")
+            implementation("com.juul.kable:kable-core:${kableVersion}")
+        }
+
+        androidMain.dependencies {
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutinesVersion}")
+        }
+    }
 }
 
-application {
-    mainClass.set("com.athlos.core.ApplicationKt")
+android {
+    compileSdk= 35
+    namespace = "com.athlos.core"
+    defaultConfig {
+        targetSdk = 35
+    }
 }
